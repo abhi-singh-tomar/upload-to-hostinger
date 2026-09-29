@@ -284,6 +284,21 @@ function viewToday() {
     ${isToday ? "" : `<button class="linkish" data-act="gotoday">Back to today</button>`}
   </header>
 
+  <section class="task-cta-wrap">
+    <button class="task-cta" data-act="toggleTaskForm">
+      <span class="task-cta-icon">${I.plus}</span>
+      <span class="task-cta-text"><b>Add a task</b><small>Give it a deadline — I'll remind you</small></span>
+    </button>
+    ${S.taskFormOpen
+      ? `<form class="addrow taskrow task-form-top" data-form="task">
+          <input id="taskTitle" placeholder="Task…" aria-label="Task title" required>
+          <input id="taskDate" type="date" aria-label="Task date" required value="${esc(d)}">
+          <input id="taskTime" type="time" aria-label="Deadline time" required value="${esc(nowHM())}">
+          <button class="btn">${I.plus}<span>Add</span></button>
+        </form>`
+      : ""}
+  </section>
+
   <section class="hero">
     <div class="hero-ring">${ring(sc.pct)}<span class="hero-pct">${Math.round(sc.pct * 100)}<small>%</small></span></div>
     <div class="hero-text">
@@ -323,17 +338,7 @@ function viewToday() {
   </section>
 
   <section class="card">
-    <div class="card-head"><h2>Hour by hour</h2>
-      <button class="btn ghost" data-act="toggleTaskForm">${I.plus}<span>Add task</span></button>
-    </div>
-    ${S.taskFormOpen
-      ? `<form class="addrow taskrow" data-form="task">
-          <input id="taskTitle" placeholder="Task…" aria-label="Task title" required>
-          <input id="taskDate" type="date" aria-label="Task date" required value="${esc(d)}">
-          <input id="taskTime" type="time" aria-label="Deadline time" required value="${esc(nowHM())}">
-          <button class="btn">${I.plus}<span>Add</span></button>
-        </form>`
-      : `<span class="muted">Tap an open hour to add yours, or add a task with a deadline</span>`}
+    <div class="card-head"><h2>Hour by hour</h2><span class="muted">Tap an open hour to add yours</span></div>
     <ol class="timeline">
       ${combined.map((p, i) => {
         const isTaskItem = !!p.isTask;
