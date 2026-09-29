@@ -3,8 +3,11 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Correct type for the app manifest; never cache the service worker
+# Correct type for the app manifest
 AddType application/manifest+json .webmanifest
-<Files "sw.js">
+
+# Never let the browser cache the app shell — always re-check the server,
+# so an update you upload actually reaches the phone on next load.
+<FilesMatch "\.(js|css|html|webmanifest|json)$">
   Header set Cache-Control "no-cache"
-</Files>
+</FilesMatch>

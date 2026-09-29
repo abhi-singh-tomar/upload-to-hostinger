@@ -247,17 +247,11 @@ const I = {
 };
 
 // ── Views ────────────────────────────────────────────────────
-let ringSeq = 0;
 function ring(pct, size = 76) {
-  const gid = `ringGrad${ringSeq++}`;
   const r = (size - 10) / 2, c = 2 * Math.PI * r, off = c * (1 - pct);
   return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true">
-    <defs><linearGradient id="${gid}" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:var(--accent)"/>
-      <stop offset="100%" style="stop-color:var(--marigold)"/>
-    </linearGradient></defs>
     <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-bg"/>
-    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-fg" style="stroke:url(#${gid})" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-fg" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
   </svg>`;
 }
 
