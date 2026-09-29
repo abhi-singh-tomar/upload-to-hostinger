@@ -258,7 +258,9 @@ function ring(pct, size = 76) {
 function viewToday() {
   const d = S.date, isToday = d === today();
   const log = logFor(d); const sc = score(d); const mu = musts(d);
-  const plan = buildPlan(d); const sp = SPECIAL[d] || {};
+  const habitTimes = new Set(HABITS.map((h) => h.time));
+  const plan = buildPlan(d).filter((p) => !habitTimes.has(p.time));
+  const sp = SPECIAL[d] || {};
   const dayTasks = S.tasks[d] || [];
   const combined = [...plan, ...dayTasks.map((t) => ({
     id: "task-" + t.id, time: t.time, cat: "task", text: t.title, star: false,

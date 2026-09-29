@@ -1,5 +1,5 @@
 // Service worker: offline shell + phone notifications
-const CACHE = "ceo-planner-v7";
+const CACHE = "ceo-planner-v8";
 const SHELL = ["./", "index.html", "app.css", "app.js", "data.js", "config.js", "manifest.webmanifest", "icons/icon-192.png"];
 
 self.addEventListener("install", (e) => {
